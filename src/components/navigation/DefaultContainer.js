@@ -18,7 +18,6 @@ import logout from "../../util/logout";
 import awaitAPICall from "../../util/apiWrapper";
 import useAbortEffect from "../../hooks/useAbortEffect";
 import useDeepEffect from "../../hooks/useDeepEffect";
-import Overworld from "../pages/Overworld";
 
 export const MeContext = createContext();
 
@@ -135,14 +134,6 @@ const DefaultContainer = (props) => {
                   authToken={props.authToken}
                 />
               );
-            }}
-          />
-
-          <Route
-            name="overworld"
-            path="/overworld"
-            render={(props) => {
-              return <Overworld {...props} authToken={props.authToken} />;
             }}
           />
         </div>

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import useDeepEffect from "../../hooks/useDeepEffect";
-import SpriteCreator from "../custom-components/SpriteCreator";
 
 const Home = (props) => {
   useDeepEffect(() => {
@@ -12,14 +11,7 @@ const Home = (props) => {
     }
   }, [props.history]);
 
-  return (
-    <div className="home-wrapper">
-      <Link to="/overworld">
-        <button>Game Start</button>
-      </Link>
-      <SpriteCreator />
-    </div>
-  );
+  return <div className="home-wrapper"></div>;
 };
 
 export default Home;

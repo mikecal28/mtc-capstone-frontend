@@ -67,7 +67,7 @@ const LoginPage = (props) => {
   return (
     <div className="login-page-container">
       <div className="login-page-wrapper">
-        <img src={Logo} alt="Logo" height="32px" />
+        {/* <img src={Logo} alt="Logo" height="32px" /> */}
 
         <div className="form-wrapper">
           <h2>Please log in</h2>
@@ -75,13 +75,22 @@ const LoginPage = (props) => {
 
           <form className="login-form" onSubmit={handleSubmit} method="POST">
             <div className="email-wrapper">
-              <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" width="10px" />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                width="10px"
+                placeholder="email@email.com"
+              />
             </div>
 
             <div className="password-wrapper">
-              <label htmlFor="password">Password</label>
-              <input id="password" name="password" type="password" />
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="*******"
+              />
             </div>
 
             <div className="fp-login-link">
