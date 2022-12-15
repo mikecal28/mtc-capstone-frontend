@@ -3,7 +3,6 @@ import { Route } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import Home from "../pages/Home";
-import Header from "../pages/Header";
 import Organization from "../pages/organization/OrganizationGet";
 import User from "../pages/user/UserGet";
 import OrganizationListPage from "../pages/organization/OrganizationListPage";
@@ -18,6 +17,8 @@ import logout from "../../util/logout";
 import awaitAPICall from "../../util/apiWrapper";
 import useAbortEffect from "../../hooks/useAbortEffect";
 import useDeepEffect from "../../hooks/useDeepEffect";
+import TopNavbar from "../pages/TopNavbar";
+import SideNavbar from "../pages/SideNavbar";
 
 export const MeContext = createContext();
 
@@ -75,13 +76,16 @@ const DefaultContainer = (props) => {
         <Route
           path="/"
           render={(props) => (
-            <Header
+            <TopNavbar
               {...props}
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
             />
           )}
         />
+
+        <Route path="/" render={(props) => <SideNavbar {...props} />} />
+
         <div className="body-container">
           <Route path="/home" component={Home}></Route>
           <Route exact path="/user/:user_id" component={User} />

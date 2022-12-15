@@ -4,8 +4,11 @@ body {
 }
 
 .body-container {
-  @include flex-center;
-  margin-top: 5%;
+  min-height: 92.35vh;
+  max-width: 90vw;
+  margin-left: 10vw;
+  margin-top: 7.65vh;
+  background-color: $mint-cream;
 }
 
 .org-filter,

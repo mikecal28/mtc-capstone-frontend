@@ -1,7 +1,7 @@
 .login-page-container {
   display: flex;
   justify-content: center;
-  background-color: $gamboge;
+  background-color: $wintergreen-dream;
   min-height: 100vh;
   min-width: 100vw;
 
@@ -76,7 +76,7 @@
 
         .login-button {
           color: white;
-          background-color: $rust;
+          background-color: $cambridge-blue;
           height: 39px;
           width: 74%;
           margin-right: 0px;
@@ -84,7 +84,7 @@
           border: 1px solid transparent;
 
           &:hover {
-            background-color: $medium-champagne;
+            background-color: $light-cyan;
           }
         }
       }

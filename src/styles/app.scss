@@ -10,7 +10,8 @@
 @import "./auth/forgot-password.scss";
 
 @import "./pages/home.scss";
-@import "./pages/header.scss";
+@import "./pages/top-navbar.scss";
+@import "./pages/side-navbar.scss";
 @import "./pages/details-page.scss";
 @import "./pages/auth/login-page.scss";
 @import "./pages/universal-search.scss";
@@ -20,6 +21,5 @@
 
 @import "./custom-components/active-badge.scss";
 @import "./custom-components/edit-title.scss";
-@import "./custom-components/sprite-creator.scss";
 
 @import "./modals/modal.scss";

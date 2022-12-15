@@ -46,6 +46,14 @@ const ProfileMenu = (props) => {
         My Account
       </div>
 
+      <div onClick={() => handleLinkClick(`/organizations`)} className="link">
+        Organizations
+      </div>
+
+      <div onClick={() => handleLinkClick(`/users`)} className="link">
+        Users
+      </div>
+
       <hr />
 
       <div onClick={() => handleLinkClick(`/login`)} className="link">

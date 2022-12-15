@@ -1,9 +1,7 @@
 .home-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 60vh;
-    font-size: 5.6rem;
-    color: $second-lightest;
+  width: 100%;
+  min-height: 92.35vh;
+  font-size: 5.6rem;
+  color: $second-lightest;
+  background-color: red;
 }
