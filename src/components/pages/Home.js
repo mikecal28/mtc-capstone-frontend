@@ -9,14 +9,19 @@ import asyncAPICall from "../../util/apiWrapper";
 import Cookies from "js-cookie";
 import DataTable from "react-data-table-component";
 import NoteModal from "../modals/NoteModal";
+import ShareModal from "../modals/ShareModal";
 
 const Home = (props) => {
   const [data, setData] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+  const [userData, setUserData] = useState([]);
   const [deleteArray, setDeleteArray] = useState([]);
+  const [shareArray, setShareArray] = useState([]);
   const [openNoteModal, setOpenNoteModal] = useState(false);
+
   const [currentNote, setCurrentNote] = useState({});
+  const [currentNoteTitle, setCurrentNoteTitle] = useState("");
   const [currentNoteBody, setCurrentNoteBody] = useState("");
+  const [currentNoteFooter, setCurrentNoteFooter] = useState([]);
   // const [columns, setColumns] = useState([]);
 
   const {
@@ -26,6 +31,8 @@ const Home = (props) => {
     setDeleteNote,
     shareNoteDebounce,
     setShareNote,
+    openShareModal,
+    setOpenShareModal,
   } = props;
 
   const mountedRef = useRef([]);
@@ -36,6 +43,7 @@ const Home = (props) => {
     });
 
     setDeleteArray(note_id_array);
+    setShareArray(note_id_array);
   };
 
   const columns = [
@@ -71,13 +79,22 @@ const Home = (props) => {
     setOpenNoteModal(true);
   };
 
+  // useEffect(() => {
+  //   if (openNoteModal === false) {
+  //     setCurrentNote({});
+  //     setCurrentNoteBody("");
+  //   }
+  // }, [openNoteModal]);
+
   useEffect(() => {
     console.log("currentNoteBody: ", currentNoteBody);
   }, [currentNoteBody]);
 
   useDeepEffect(() => {
     if (currentNote?.body) {
+      setCurrentNoteTitle(currentNote.title);
       setCurrentNoteBody(currentNote.body);
+      setCurrentNoteFooter(currentNote.users);
     }
   }, [currentNote]);
 
@@ -241,6 +258,32 @@ const Home = (props) => {
           setCurrentNote={setCurrentNote}
           currentNoteBody={currentNoteBody}
           setCurrentNoteBody={setCurrentNoteBody}
+          currentNoteTitle={currentNoteTitle}
+          setCurrentNoteTitle={setCurrentNoteTitle}
+          currentNoteFooter={currentNoteFooter}
+          setCurrentNoteFooter={setCurrentNoteFooter}
+          data={data}
+          setData={setData}
+        />
+      )}
+      {openShareModal && (
+        <ShareModal
+          modalOpen={openShareModal}
+          setModalOpen={setOpenShareModal}
+          currentNote={currentNote}
+          setCurrentNote={setCurrentNote}
+          currentNoteBody={currentNoteBody}
+          setCurrentNoteBody={setCurrentNoteBody}
+          currentNoteTitle={currentNoteTitle}
+          setCurrentNoteTitle={setCurrentNoteTitle}
+          currentNoteFooter={currentNoteFooter}
+          setCurrentNoteFooter={setCurrentNoteFooter}
+          data={data}
+          setData={setData}
+          shareArray={shareArray}
+          setShareArray={setShareArray}
+          userData={userData}
+          setUserData={setUserData}
         />
       )}
     </div>

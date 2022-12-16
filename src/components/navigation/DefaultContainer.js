@@ -30,6 +30,7 @@ const DefaultContainer = (props) => {
   const [addNote, setAddNote] = useState(false);
   const [deleteNote, setDeleteNote] = useState(false);
   const [shareNote, setShareNote] = useState(false);
+  const [openShareModal, setOpenShareModal] = useState(false);
 
   const addNoteDebounce = useDebounce(addNote);
   const deleteNoteDebounce = useDebounce(deleteNote);
@@ -103,6 +104,8 @@ const DefaultContainer = (props) => {
               setDeleteNote={setDeleteNote}
               shareNoteDebounce={shareNoteDebounce}
               setShareNote={setShareNote}
+              openShareModal={openShareModal}
+              setOpenShareModal={setOpenShareModal}
             />
           )}
         />
@@ -119,6 +122,8 @@ const DefaultContainer = (props) => {
                 setDeleteNote={setDeleteNote}
                 shareNoteDebounce={shareNoteDebounce}
                 setShareNote={setShareNote}
+                openShareModal={openShareModal}
+                setOpenShareModal={setOpenShareModal}
               />
             )}
           />

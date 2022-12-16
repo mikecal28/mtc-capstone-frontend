@@ -35,11 +35,21 @@ const NoteModal = (props) => {
     setModalOpen,
     currentNote,
     setCurrentNote,
+    currentNoteTitle,
+    setCurrentNoteTitle,
     currentNoteBody,
     setCurrentNoteBody,
+    currentNoteFooter,
+    setCurrentNoteFooter,
+    data,
+    setData,
   } = props;
 
-  const handleChange = (e) => {
+  const handleTitleChange = (e) => {
+    setCurrentNoteTitle(e.target.value);
+  };
+
+  const handleBodyChange = (e) => {
     setCurrentNoteBody(e.target.value);
   };
 
@@ -49,11 +59,31 @@ const NoteModal = (props) => {
         "/note/update",
         "POST",
         {
+          note_id: currentNote.note_id,
+          title: currentNoteTitle,
           body: currentNoteBody,
         },
         null,
         (data) => {
-          return false;
+          asyncAPICall(
+            "/note/get",
+            "GET",
+            null,
+            null,
+            (data) => {
+              setData(data);
+              setCurrentNote({});
+              setCurrentNoteTitle("");
+              setCurrentNoteBody("");
+              setCurrentNoteFooter([]);
+              return false;
+            },
+            (err) => {
+              console.warn("Note Get Error: ", err);
+            },
+            null,
+            true
+          );
         },
         (err) => {
           console.warn("Note Update Error: ", err);
@@ -91,14 +121,20 @@ const NoteModal = (props) => {
         style={styles}
       >
         <div className="note-modal">
-          <div className="note-title">Title</div>
+          <div className="note-title">
+            <input
+              type="text"
+              value={currentNoteTitle}
+              onChange={(e) => handleTitleChange(e)}
+            />
+          </div>
           <div className="note-body">
             <textarea
               value={currentNoteBody}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleBodyChange(e)}
             />
           </div>
-          <div className="note-footer">Hi</div>
+          <div className="note-footer">Authors:</div>
         </div>
       </Modal>
     </>

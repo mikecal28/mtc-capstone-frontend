@@ -101,9 +101,10 @@
     right: 0px;
     top: 50px;
     width: 190px;
-    background-color: white;
+    background-color: $azure-x-11-web-color;
     color: black;
     border: 1px solid $light-grey;
+    border-bottom-left-radius: 5%;
     padding: 20px;
     padding-top: 10px;
     line-height: 1.3em;

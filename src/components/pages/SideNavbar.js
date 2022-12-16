@@ -16,6 +16,8 @@ const SideNavbar = (props) => {
     setDeleteNote,
     shareNoteDebounce,
     setShareNote,
+    openShareModal,
+    setOpenShareModal,
   } = props;
 
   // const redirectTo = (path) => {
@@ -43,7 +45,7 @@ const SideNavbar = (props) => {
 
       <div
         className="side-navbar-btn share-note"
-        onClick={() => setShareNote(true)}
+        onClick={() => setOpenShareModal(true)}
       >
         <FontAwesomeIcon icon="fa-solid fa-share-nodes" />
       </div>

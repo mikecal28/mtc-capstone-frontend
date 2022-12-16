@@ -15,6 +15,14 @@ const LoginPage = (props) => {
     logout();
   }, [props.from]);
 
+  useEffect(() => {
+    Cookies.remove("auth_token");
+    Cookies.remove("user_role");
+    Cookies.remove("user_name");
+    Cookies.remove("auth_expires");
+    Cookies.remove("org_id");
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_body = new FormData(e.target);
