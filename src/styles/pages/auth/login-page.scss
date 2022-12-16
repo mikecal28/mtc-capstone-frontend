@@ -9,13 +9,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: -12px;
 
     img {
       margin-bottom: 30px;
+      padding-left: 2%;
+      filter: invert(93%) sepia(18%) saturate(157%) hue-rotate(115deg)
+        brightness(91%) contrast(97%);
     }
 
     .form-wrapper {
-      width: 400px;
+      width: 300px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -24,7 +28,8 @@
         color: white;
         margin: 0;
         padding: 0;
-        font-size: 42px;
+        font-size: 18px;
+        align-self: flex-start;
       }
 
       .login-form {
@@ -40,7 +45,7 @@
         .password-wrapper {
           input {
             height: 32px;
-            width: 71%;
+            width: 100%;
             border: solid thin rgba(191, 193, 197, 0.75);
             border-radius: 4px;
             margin: 0;
@@ -62,6 +67,7 @@
         .fp-login-link {
           margin: 2% 0;
           font-size: 12px;
+          text-align: right;
 
           .no-decoration {
             color: white;
@@ -78,7 +84,7 @@
           color: white;
           background-color: $cambridge-blue;
           height: 39px;
-          width: 74%;
+          width: 103.5%;
           margin-right: 0px;
           transition: 0.3s ease-in-out;
           border: 1px solid transparent;

@@ -19,6 +19,7 @@ import useAbortEffect from "../../hooks/useAbortEffect";
 import useDeepEffect from "../../hooks/useDeepEffect";
 import TopNavbar from "../pages/TopNavbar";
 import SideNavbar from "../pages/SideNavbar";
+import useDebounce from "../../hooks/useDebounce";
 
 export const MeContext = createContext();
 
@@ -26,6 +27,13 @@ const DefaultContainer = (props) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [me, setMe] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [addNote, setAddNote] = useState(false);
+  const [deleteNote, setDeleteNote] = useState(false);
+  const [shareNote, setShareNote] = useState(false);
+
+  const addNoteDebounce = useDebounce(addNote);
+  const deleteNoteDebounce = useDebounce(deleteNote);
+  const shareNoteDebounce = useDebounce(shareNote);
 
   useEffect(() => {
     let auth_token_from_cookie = Cookies.get("auth_token");
@@ -84,10 +92,36 @@ const DefaultContainer = (props) => {
           )}
         />
 
-        <Route path="/" render={(props) => <SideNavbar {...props} />} />
+        <Route
+          path="/"
+          render={(props) => (
+            <SideNavbar
+              {...props}
+              addNoteDebounce={addNoteDebounce}
+              setAddNote={setAddNote}
+              deleteNoteDebounce={deleteNoteDebounce}
+              setDeleteNote={setDeleteNote}
+              shareNoteDebounce={shareNoteDebounce}
+              setShareNote={setShareNote}
+            />
+          )}
+        />
 
         <div className="body-container">
-          <Route path="/home" component={Home}></Route>
+          <Route
+            path="/home"
+            render={(props) => (
+              <Home
+                {...props}
+                addNoteDebounce={addNoteDebounce}
+                setAddNote={setAddNote}
+                deleteNoteDebounce={deleteNoteDebounce}
+                setDeleteNote={setDeleteNote}
+                shareNoteDebounce={shareNoteDebounce}
+                setShareNote={setShareNote}
+              />
+            )}
+          />
           <Route exact path="/user/:user_id" component={User} />
           <Route path="/users" component={UserListPage} />
           <Route

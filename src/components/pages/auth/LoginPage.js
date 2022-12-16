@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
-import Logo from "../../../static/images/logo.svg";
+import NotesLogo from "../../../static/images/notes-logo.svg";
 import logout from "../../../util/logout";
 import { awaitAPICall } from "../../../util/apiWrapper";
 
@@ -67,7 +67,7 @@ const LoginPage = (props) => {
   return (
     <div className="login-page-container">
       <div className="login-page-wrapper">
-        {/* <img src={Logo} alt="Logo" height="32px" /> */}
+        <img src={NotesLogo} alt="Logo" height="200px" />
 
         <div className="form-wrapper">
           <h2>Please log in</h2>

@@ -9,6 +9,15 @@ import NotesLogo from "../../static/images/notes-logo.svg";
 const SideNavbar = (props) => {
   // const { searchTerm, setSearchTerm, history } = props;
 
+  const {
+    addNoteDebounce,
+    setAddNote,
+    deleteNoteDebounce,
+    setDeleteNote,
+    shareNoteDebounce,
+    setShareNote,
+  } = props;
+
   // const redirectTo = (path) => {
   //   history.push(path);
   // };
@@ -25,12 +34,25 @@ const SideNavbar = (props) => {
         <img src={NotesLogo} alt="logo" />
       </Link>
 
-      <div className="side-navbar-btn">
+      <div
+        className="side-navbar-btn add-note"
+        onClick={() => setAddNote(true)}
+      >
         <FontAwesomeIcon icon="fa-solid fa-file-circle-plus" />
       </div>
 
-      <div className="side-navbar-btn">
+      <div
+        className="side-navbar-btn share-note"
+        onClick={() => setShareNote(true)}
+      >
         <FontAwesomeIcon icon="fa-solid fa-share-nodes" />
+      </div>
+
+      <div
+        className="side-navbar-btn delete-notes"
+        onClick={() => setDeleteNote(true)}
+      >
+        <FontAwesomeIcon icon="fa-solid fa-trash" />
       </div>
     </div>
   );

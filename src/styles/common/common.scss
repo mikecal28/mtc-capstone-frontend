@@ -1,13 +1,21 @@
 body {
   margin: 0px;
   font-family: "Roboto", sans-serif;
+  overflow-y: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .body-container {
   min-height: 92.35vh;
+  padding: 0px;
   max-width: 90vw;
   margin-left: 10vw;
-  margin-top: 7.65vh;
+  margin-top: 5vh;
   background-color: $mint-cream;
 }
 

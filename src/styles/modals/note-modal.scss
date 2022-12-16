@@ -1,0 +1,53 @@
+.note-modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px;
+  height: 100%;
+  position: absolute;
+  left: 42%;
+  top: 50%;
+  outline: none;
+  background-color: white;
+  z-index: 15;
+  transform: translate(-42%, -50%);
+  border-radius: 2px solid blue;
+
+  border-radius: 5px;
+  box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.32);
+
+  .note-title {
+    position: absolute;
+    top: 0%;
+    left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 10%;
+    background-color: blue;
+  }
+
+  .note-body {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 90%;
+    height: 80%;
+    background-color: red;
+  }
+
+  .note-footer {
+    position: absolute;
+    top: 90%;
+    left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 10%;
+    background-color: yellow;
+  }
+}
