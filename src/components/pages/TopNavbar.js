@@ -1,25 +1,44 @@
 import { useState, useContext } from "react";
-import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Logo from "../../static/images/logo.svg";
 import ProfileMenu from "../navigation/ProfileMenu";
 
 import { MeContext } from "../navigation/DefaultContainer";
+import asyncAPICall from "../../util/apiWrapper";
 
 const TopNavbar = (props) => {
   const me = useContext(MeContext);
-  const { searchTerm, setSearchTerm, history } = props;
+  const { searchTerm, setSearchTerm, searchResults, setSearchResults } = props;
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const redirectTo = (path) => {
-    history.push(path);
+  const getSearchResults = (e) => {
+    try {
+      e.preventDefault();
+    } catch {}
+
+    if (searchTerm) {
+      asyncAPICall(
+        `/note/search/${searchTerm}`,
+        "GET",
+        null,
+        null,
+        (data) => setSearchResults(data),
+        (err) => console.warn("Search Error: ", err),
+        null,
+        true
+      );
+    }
   };
 
-  const getSearchResults = (e) => {
-    e.preventDefault();
-
-    redirectTo(`/universal-search/${searchTerm}`);
+  const handleSubmit = () => {
+    if (searchResults?.length === 0) {
+      if (searchTerm) {
+        getSearchResults();
+      }
+    } else {
+      setSearchResults([]);
+      setSearchTerm("");
+    }
   };
 
   return (
@@ -28,7 +47,7 @@ const TopNavbar = (props) => {
         <div className="search-bar-wrapper">
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search Notes"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             style={{
@@ -36,19 +55,9 @@ const TopNavbar = (props) => {
             }}
           />
 
-          {!searchTerm ? (
-            <FontAwesomeIcon
-              icon="fa-solid fa-magnifying-glass"
-              color="black"
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon="fa-solid fa-x"
-              color="black"
-              className="icon-x"
-              onClick={() => setSearchTerm("")}
-            />
-          )}
+          <div className="reset-btn" onClick={() => handleSubmit()}>
+            {searchResults?.length === 0 ? "Search" : "Reset"}
+          </div>
         </div>
       </form>
 

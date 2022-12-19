@@ -1,10 +1,8 @@
 import { useState } from "react";
 import Modal from "react-modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { awaitAPICall } from "../../util/apiWrapper";
+import useDeepEffect from "../../hooks/useDeepEffect";
 import asyncAPICall from "../../util/apiWrapper";
-import logout from "../../util/logout";
 
 Modal.setAppElement("#root");
 
@@ -30,6 +28,8 @@ const styles = {
 };
 
 const NoteModal = (props) => {
+  const [footerElements, setFooterElements] = useState([]);
+
   const {
     modalOpen,
     setModalOpen,
@@ -39,9 +39,7 @@ const NoteModal = (props) => {
     setCurrentNoteTitle,
     currentNoteBody,
     setCurrentNoteBody,
-    currentNoteFooter,
     setCurrentNoteFooter,
-    data,
     setData,
   } = props;
 
@@ -94,23 +92,39 @@ const NoteModal = (props) => {
     });
   };
 
-  // function handleDelete() {
-  //   let auth_ok = awaitAPICall(
-  //     `/${props.objectType}/delete/${props.id}`,
-  //     "DELETE",
-  //     null,
-  //     null,
-  //     (data) => {
-  //       console.log(`${props.objectType} deleted`);
-  //       setModalOpen(false);
-  //       props.redirectTo(`/${props.objectType}s`);
-  //     },
-  //     null
-  //   );
-  //   if (!auth_ok) {
-  //     logout(props);
-  //   }
-  // }
+  useDeepEffect(() => {
+    if (currentNote?.note_id) {
+      asyncAPICall(
+        `/note/get/${currentNote.note_id}`,
+        "GET",
+        null,
+        null,
+        (data) => {
+          let elements = data.users.map((user, idx) => {
+            if (idx + 1 !== data.users.length) {
+              return (
+                <div key={`${user.user_id}`} className="authors">
+                  {user.first_name} {user.last_name}
+                  {","}
+                </div>
+              );
+            } else {
+              return (
+                <div key={`${user.user_id}`} className="authors">
+                  {user.first_name} {user.last_name}
+                  {"."}
+                </div>
+              );
+            }
+          });
+          setFooterElements(elements);
+        },
+        (err) => err,
+        null,
+        true
+      );
+    }
+  }, [currentNote]);
 
   return (
     <>
@@ -134,7 +148,7 @@ const NoteModal = (props) => {
               onChange={(e) => handleBodyChange(e)}
             />
           </div>
-          <div className="note-footer">Authors:</div>
+          <div className="note-footer">Authors: {footerElements}</div>
         </div>
       </Modal>
     </>

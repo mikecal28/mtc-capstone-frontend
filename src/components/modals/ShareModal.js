@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { awaitAPICall } from "../../util/apiWrapper";
 import asyncAPICall from "../../util/apiWrapper";
-import logout from "../../util/logout";
 import useDeepEffect from "../../hooks/useDeepEffect";
 
 Modal.setAppElement("#root");
@@ -37,18 +34,12 @@ const ShareModal = (props) => {
   const {
     modalOpen,
     setModalOpen,
-    currentNote,
     setCurrentNote,
-    currentNoteTitle,
     setCurrentNoteTitle,
-    currentNoteBody,
     setCurrentNoteBody,
-    currentNoteFooter,
     setCurrentNoteFooter,
-    data,
     setData,
     shareArray,
-    setShareArray,
     userData,
     setUserData,
   } = props;
@@ -58,8 +49,6 @@ const ShareModal = (props) => {
   };
 
   const handleClose = () => {
-    console.log("share_id: ", selectedOption);
-    console.log("notes: ", shareArray);
     setModalOpen((mO) => {
       asyncAPICall(
         "/note/share",
@@ -115,6 +104,7 @@ const ShareModal = (props) => {
       null,
       true
     );
+    //eslint-disable-next-line
   }, []);
 
   useDeepEffect(() => {
@@ -128,10 +118,6 @@ const ShareModal = (props) => {
 
     setOptions(options);
   }, [userData]);
-
-  useEffect(() => {
-    console.log("selectedOption: ", selectedOption);
-  }, [selectedOption]);
 
   return (
     <>
@@ -148,7 +134,7 @@ const ShareModal = (props) => {
             value={selectedOption}
             onChange={(e) => handleChange(e)}
           >
-            <option value="">--Please choose an option--</option>
+            <option value="">--Please choose a User--</option>
             {options}
           </select>
           <div className="confirm-share-btn" onClick={() => handleClose()}>

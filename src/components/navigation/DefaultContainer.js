@@ -31,6 +31,9 @@ const DefaultContainer = (props) => {
   const [deleteNote, setDeleteNote] = useState(false);
   const [shareNote, setShareNote] = useState(false);
   const [openShareModal, setOpenShareModal] = useState(false);
+  const [deleteArray, setDeleteArray] = useState([]);
+  const [shareArray, setShareArray] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   const addNoteDebounce = useDebounce(addNote);
   const deleteNoteDebounce = useDebounce(deleteNote);
@@ -40,7 +43,6 @@ const DefaultContainer = (props) => {
     let auth_token_from_cookie = Cookies.get("auth_token");
     let expiration = Cookies.get("auth_expires");
     let is_expired = Date.parse(expiration) < Date.now();
-    // console.log('UseEffect in default Container', auth_token_from_cookie, is_expired)
     if (!auth_token_from_cookie || is_expired) {
       logout(props);
     }
@@ -89,6 +91,8 @@ const DefaultContainer = (props) => {
               {...props}
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
+              searchResults={searchResults}
+              setSearchResults={setSearchResults}
             />
           )}
         />
@@ -106,6 +110,10 @@ const DefaultContainer = (props) => {
               setShareNote={setShareNote}
               openShareModal={openShareModal}
               setOpenShareModal={setOpenShareModal}
+              deleteArray={deleteArray}
+              setDeleteArray={setDeleteArray}
+              shareArray={shareArray}
+              setShareArray={setShareArray}
             />
           )}
         />
@@ -124,6 +132,12 @@ const DefaultContainer = (props) => {
                 setShareNote={setShareNote}
                 openShareModal={openShareModal}
                 setOpenShareModal={setOpenShareModal}
+                deleteArray={deleteArray}
+                setDeleteArray={setDeleteArray}
+                shareArray={shareArray}
+                setShareArray={setShareArray}
+                searchResults={searchResults}
+                setSearchResults={setSearchResults}
               />
             )}
           />

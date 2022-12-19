@@ -31,6 +31,50 @@
     text-decoration: none;
   }
 
+  .reset-btn {
+    font-size: 0.85rem;
+    height: 1.75rem;
+    width: 5rem;
+    background-color: $cambridge-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin-right: 1rem;
+    margin-left: -0.5rem;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: all 0.04s ease;
+
+    &:hover {
+      background-color: #a1bfae;
+
+      * {
+        transform: scale(0.99);
+      }
+    }
+
+    &:active,
+    &:focus {
+      background-color: #87a193;
+      box-shadow: inset 0px 0px 5px #000000;
+
+      * {
+        transform: scale(0.98);
+      }
+    }
+
+    .active {
+      background-color: green;
+    }
+
+    * {
+      height: max(3.5vw, 1.25rem);
+    }
+  }
+
   .search-bar-wrapper {
     display: flex;
     align-items: center;

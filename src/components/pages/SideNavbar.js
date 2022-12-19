@@ -1,34 +1,42 @@
-// import { useState, useContext } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import NotesLogo from "../../static/images/notes-logo.svg";
-
-// import { MeContext } from "../navigation/DefaultContainer";
+import NoneSelected from "../modals/NoneSelected";
 
 const SideNavbar = (props) => {
-  // const { searchTerm, setSearchTerm, history } = props;
+  const [noneSelectedModalOpen, setNoneSelectedModalOpen] = useState(false);
 
   const {
-    addNoteDebounce,
     setAddNote,
-    deleteNoteDebounce,
     setDeleteNote,
-    shareNoteDebounce,
-    setShareNote,
-    openShareModal,
     setOpenShareModal,
+    deleteArray,
+    shareArray,
   } = props;
 
-  // const redirectTo = (path) => {
-  //   history.push(path);
-  // };
-
-  // const getSearchResults = (e) => {
-  //   e.preventDefault();
-
-  //   redirectTo(`/universal-search/${searchTerm}`);
-  // };
+  const handleClick = useCallback(
+    (value) => {
+      if (value === "add") {
+        setAddNote(true);
+      } else if (value === "share") {
+        if (shareArray?.length > 0) {
+          setOpenShareModal(true);
+        } else {
+          setNoneSelectedModalOpen(true);
+        }
+      } else if (value === "delete") {
+        if (deleteArray?.length) {
+          setDeleteNote(true);
+        } else {
+          setNoneSelectedModalOpen(true);
+        }
+      }
+    },
+    //eslint-disable-next-line
+    [shareArray?.length, deleteArray?.length]
+  );
 
   return (
     <div className="side-navbar-container">
@@ -38,24 +46,30 @@ const SideNavbar = (props) => {
 
       <div
         className="side-navbar-btn add-note"
-        onClick={() => setAddNote(true)}
+        onClick={() => handleClick("add")}
       >
         <FontAwesomeIcon icon="fa-solid fa-file-circle-plus" />
       </div>
 
       <div
         className="side-navbar-btn share-note"
-        onClick={() => setOpenShareModal(true)}
+        onClick={() => handleClick("share")}
       >
         <FontAwesomeIcon icon="fa-solid fa-share-nodes" />
       </div>
 
       <div
         className="side-navbar-btn delete-notes"
-        onClick={() => setDeleteNote(true)}
+        onClick={() => handleClick("delete")}
       >
         <FontAwesomeIcon icon="fa-solid fa-trash" />
       </div>
+      {noneSelectedModalOpen && (
+        <NoneSelected
+          modalOpen={noneSelectedModalOpen}
+          setModalOpen={setNoneSelectedModalOpen}
+        />
+      )}
     </div>
   );
 };

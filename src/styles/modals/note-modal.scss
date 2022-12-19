@@ -10,7 +10,7 @@
   left: 42%;
   top: 50%;
   outline: none;
-  background-color: white;
+  background-color: $mint-cream;
   z-index: 15;
   transform: translate(-42%, -50%);
   border-radius: 2px solid blue;
@@ -33,7 +33,10 @@
       text-align: center;
       outline: none;
       border: none;
+      padding-top: 5px;
       font-size: 18px;
+      font-weight: 900;
+      background-color: $mint-cream;
     }
   }
 
@@ -42,7 +45,7 @@
     top: 10%;
     left: 5%;
     width: 90%;
-    height: 80%;
+    height: 83.5%;
 
     textarea {
       resize: none;
@@ -50,18 +53,30 @@
       height: 100%;
       outline: none;
       border: none;
+      border-top: 1px solid $wintergreen-dream;
+      border-bottom: 1px solid $wintergreen-dream;
+      padding: 10px 15px;
       font-family: Arial, Helvetica, sans-serif;
+      background-color: $mint-cream;
     }
   }
 
   .note-footer {
     position: absolute;
-    top: 90%;
+    top: 91.75%;
     left: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
     width: 90%;
     height: 10%;
+    font-weight: 900;
+
+    .authors {
+      font-size: 12px;
+      font-weight: 400;
+      padding-top: 2px;
+    }
   }
 }
