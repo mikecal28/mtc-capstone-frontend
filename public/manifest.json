@@ -1,9 +1,9 @@
 {
-  "short_name": "Foundation App",
-  "name": "Foundation App Basis",
+  "short_name": "Notes App",
+  "name": "Notes App",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "notes-favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
