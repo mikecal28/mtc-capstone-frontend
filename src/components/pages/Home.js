@@ -9,7 +9,6 @@ import NoteModal from "../modals/NoteModal";
 import ShareModal from "../modals/ShareModal";
 
 const Home = (props) => {
-  const [displayedNotes, setDisplayedNotes] = useState([]);
   const [data, setData] = useState([]);
   const [userData, setUserData] = useState([]);
   const [openNoteModal, setOpenNoteModal] = useState(false);
@@ -75,28 +74,30 @@ const Home = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (mountedRef.current) {
-      asyncAPICall(
-        "/note/get",
-        "GET",
-        null,
-        null,
-        (data) => {
-          if (mountedRef.current) {
-            setData(data);
-          }
-        },
-        (err) => {
-          if (mountedRef.current) {
-            console.warn("Note Get Error: ", err);
-          }
-        },
-        null,
-        true
-      );
+  useDeepEffect(() => {
+    if (searchResults?.length === 0) {
+      if (mountedRef.current) {
+        asyncAPICall(
+          "/note/get",
+          "GET",
+          null,
+          null,
+          (data) => {
+            if (mountedRef.current) {
+              setData(data);
+            }
+          },
+          (err) => {
+            if (mountedRef.current) {
+              console.warn("Note Get Error: ", err);
+            }
+          },
+          null,
+          true
+        );
+      }
     }
-  }, []);
+  }, [searchResults]);
 
   useDeepEffect(() => {
     if (mountedRef.current) {
@@ -192,9 +193,9 @@ const Home = (props) => {
 
   useDeepEffect(() => {
     if (searchResults?.length > 0) {
-      setDisplayedNotes(searchResults);
+      setData(searchResults);
     } else {
-      setDisplayedNotes(data);
+      setData(data);
     }
   }, [searchResults, data]);
 
@@ -211,7 +212,7 @@ const Home = (props) => {
       <div className="table-wrapper">
         <DataTable
           columns={columns}
-          data={displayedNotes}
+          data={data}
           pagination
           paginationPerPage={15}
           paginationRowsPerPageOptions={[15, 20, 25, 30]}
